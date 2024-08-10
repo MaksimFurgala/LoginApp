@@ -10,7 +10,14 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_login)
+
+        val action = intent.getStringExtra("action")
+        when(action) {
+            "login" -> setContentView(R.layout.activity_login)
+            "signup" -> setContentView(R.layout.activity_signup)
+            else -> RuntimeException("Invalid bundle!")
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
